@@ -77,9 +77,10 @@ def Level_Column_Adding_Function(input_path):
         book.sheets(1).used_range.api.Replace("1510", "") # 입력된 값 중 불필요 값 정리
         # print(' ///// EXE : Replace ///// ')    
         
-        
+ 
     ##### 작업 완료 파일 저장
-    input_path = input_path[0:-5] + "_LEVEL.xlsx"
+    index = input_path.rfind(".")
+    input_path = input_path[0:index] + "_LEVEL.xlsx"
     book.save(input_path)
     book.app.kill()
 
