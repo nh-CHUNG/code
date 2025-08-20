@@ -4,17 +4,22 @@ from tkinter import filedialog
 
 ###### def open_file() Button:
 def open_file():
+    global open_file_path
     label___Level_Column_Adding_Function['text'] = ""
+    [open_file_path, open_file_name] = file_info()
+    label___open_file['text'] = open_file_name
 
-    file_path = filedialog.askopenfilename(filetypes=[('Excel File','.xlsx')])
-    # file_path = filedialog.askopenfilename(filetypes=[('Excel File','.xls'),('Excel File','.xlsx'),('Excel File','.csv'),('All File','.*')])
+
+###### def file_info():
+def file_info():
+    # file_path = filedialog.askopenfilename(filetypes=[('Excel File','.xlsx')])
+    file_path = filedialog.askopenfilename(filetypes=[('Excel File','.xls'),('Excel File','.xlsx'),('Excel File','.csv'),('All File','.*')])
     file_path = file_path.replace('\\', '/')
-    label___open_file['text'] = file_path
-    
+
     index = file_path.rfind("/")
     file_name = file_path[index+1:len(file_path)]
-    label___open_file['text'] = file_name
-    # print(label___open_file['text'])
+
+    return file_path, file_name
 
 
 ###### def Level_Column_Adding_file() Button:
@@ -24,10 +29,10 @@ def Level_Column_Adding_file():
         # print(label___open_file['text'])
     else :
         label___Level_Column_Adding_Function['text'] = "Leveling Now"
-        file_path  = label___open_file['text']
+        open_file_path
         # print(label___open_file['text'])
         ##### ploting
-        Level_Column_Adding_Function(file_path)
+        Level_Column_Adding_Function(open_file_path)
         label___Level_Column_Adding_Function['text'] = "Finish"
 
 
@@ -90,6 +95,8 @@ def Level_Column_Adding_Function(input_path):
 
 ##### 창 만들기 #####
 root = tk.Tk()
+
+
 # width, height = 500, 25 # 창 크기 값 설정
 # get_path = None
 root.geometry("400x100") # 창 크기 설정
@@ -102,6 +109,7 @@ button___open_file.pack()
 
 label___open_file = tk.Label(root, text="Please Select File")
 label___open_file.pack()
+
 
 # Level_Column_Adding_Function
 button___Level_Column_Adding_Function = tk.Button(root, text="2. Level Column Adding", command=Level_Column_Adding_file)
