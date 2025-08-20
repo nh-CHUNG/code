@@ -11,6 +11,9 @@ def open_file():
     file_path = file_path.replace('\\', '/')
     label___open_file['text'] = file_path
     
+    index = file_path.rfind("/")
+    file_name = file_path[index+1:len(file_path)]
+    label___open_file['text'] = file_name
     # print(label___open_file['text'])
 
 
