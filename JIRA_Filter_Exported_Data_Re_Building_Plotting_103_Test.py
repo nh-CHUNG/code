@@ -128,50 +128,57 @@ root.geometry("450x200") # 창 크기 설정
 root.resizable(True, True) # 크기 조정 가능 여부
 root.title('JIRA Filter Re-Building Data Ploting') # 창 제목 설정
 
+# 확장 가능한 행과 열 설정
+# root.columnconfigure(0, weight=1) # 0번 열이 확장 가능
+# root.rowconfigure(0, weight=1)    # 0번 행이 확장 가능
+root.columnconfigure(1, weight=1) # 1번 열이 확장 가능
+# root.rowconfigure(1, weight=1)    # 1번 행이 확장 가능
+
+
 # 1. Select File
 Label___open_file = tk.Label(root, text="1. Select File")
-Label___open_file.grid(row=0, column=0, columnspan=3)
+Label___open_file.grid(row=0, column=0, columnspan=3, sticky='EW')
 
 
 # Select File
 Label___open_file_A = tk.Label(root, text="File A : ")
-Label___open_file_A.grid(row=1, column=0)
-Text___open_file_A = tk.Label(root, height = 1, width = 45, bg="lightblue")
-Text___open_file_A.grid(row=1, column=1, padx=5, pady=5, sticky='EW')
+Label___open_file_A.grid(row=1, column=0, sticky='E')
+Text___open_file_A = tk.Label(root, text="Please Select File...", height = 1, width = 45, bg="lightblue")
+Text___open_file_A.grid(row=1, column=1, padx=5, pady=5, sticky='WE')
 button___open_file_A  = tk.Button(root, text="Select...", command=partial(open_file_button, Text___open_file_A))
-button___open_file_A.grid(row=1, column=2)
+button___open_file_A.grid(row=1, column=2, sticky='W')
 
 
 Label___open_file_B = tk.Label(root, text="File B : ")
-Label___open_file_B.grid(row=2, column=0)
-Text___open_file_B = tk.Label(root, height = 1, width = 45, bg="lightblue")
-Text___open_file_B.grid(row=2, column=1, padx=5, pady=5, sticky='EW')
+Label___open_file_B.grid(row=2, column=0, sticky='E')
+Text___open_file_B = tk.Label(root, text="Please Select File...", height = 1, width = 45, bg="lightblue")
+Text___open_file_B.grid(row=2, column=1, padx=5, pady=5, sticky='WE')
 button___open_file_B  = tk.Button(root, text="Select...", command=partial(open_file_button, Text___open_file_B))
-button___open_file_B.grid(row=2, column=2)
+button___open_file_B.grid(row=2, column=2, sticky='W')
 
 
 Label___open_file_C = tk.Label(root, text="File C : ")
-Label___open_file_C.grid(row=3, column=0)
-Text___open_file_C = tk.Label(root, height = 1, width = 45, bg="lightblue")
-Text___open_file_C.grid(row=3, column=1, padx=5, pady=5, sticky='EW')
+Label___open_file_C.grid(row=3, column=0, sticky='E')
+Text___open_file_C = tk.Label(root, text="Please Select File...", height = 1, width = 45, bg="lightblue")
+Text___open_file_C.grid(row=3, column=1, padx=5, pady=5, sticky='WE')
 button___open_file_C  = tk.Button(root, text="Select...", command=partial(open_file_button, Text___open_file_C))
-button___open_file_C.grid(row=3, column=2)
+button___open_file_C.grid(row=3, column=2, sticky='W')
 
 
 Label___open_file_D = tk.Label(root, text="File D : ")
-Label___open_file_D.grid(row=4, column=0)
-Text___open_file_D = tk.Label(root, height = 1, width = 45, bg="lightblue")
-Text___open_file_D.grid(row=4, column=1, padx=5, pady=5, sticky='EW')
+Label___open_file_D.grid(row=4, column=0, sticky='E')
+Text___open_file_D = tk.Label(root, text="Please Select File...", height = 1, width = 45, bg="lightblue")
+Text___open_file_D.grid(row=4, column=1, padx=5, pady=5, sticky='WE')
 button___open_file_D  = tk.Button(root, text="Select...", command=partial(open_file_button, Text___open_file_D))
-button___open_file_D.grid(row=4, column=2)
+button___open_file_D.grid(row=4, column=2, sticky='W')
 
 
-Label___open_file_E = tk.Label(root, text="File A : ")
-Label___open_file_E.grid(row=5, column=0)
-Text___open_file_E = tk.Label(root, height = 1, width = 45, bg="lightblue")
-Text___open_file_E.grid(row=5, column=1, padx=5, pady=5, sticky='EW')
+Label___open_file_E = tk.Label(root, text="File E : ")
+Label___open_file_E.grid(row=5, column=0, sticky='E')
+Text___open_file_E = tk.Label(root, text="Please Select File...", height = 1, width = 45, bg="lightblue")
+Text___open_file_E.grid(row=5, column=1, padx=5, pady=5, sticky='WE')
 button___open_file_E  = tk.Button(root, text="Select...", command=partial(open_file_button, Text___open_file_E))
-button___open_file_E.grid(row=5, column=2)
+button___open_file_E.grid(row=5, column=2, sticky='W')
 
 
 
