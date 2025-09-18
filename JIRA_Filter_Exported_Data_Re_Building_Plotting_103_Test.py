@@ -1,7 +1,5 @@
 import tkinter as tk
 from tkinter import filedialog
-from functools import partial
-
 
 ###### Preload Funcitons ######
 ###### def file_info():
@@ -14,6 +12,9 @@ def file_info():
     file_name = file_path[index+1:len(file_path)]
 
     return file_path, file_name
+
+
+
 
 
 ###### def find_cell_info():
@@ -114,7 +115,7 @@ def file_info():
 
 ##### 창 만들기 #####
 root = tk.Tk()
-root.geometry("450x200") # 창 크기 설정 가로x세로
+root.geometry("450x400") # 창 크기 설정 가로x세로
 root.resizable(True, True) # 크기 조정 가능 여부
 root.title('JIRA Filter Re-Building Data Ploting') # 창 제목 설정
 
@@ -128,60 +129,86 @@ root.columnconfigure(1, weight=1) # 1번 열↕ 확장 가능
 # 1. Select File
 Label___open_file = tk.Label(root, text="1. Select File")
 Label___open_file.grid(row=0, column=0, columnspan=3, sticky='EW')
-
+global OPEN_FILE_PATH
+OPEN_FILE_PATH = []
 
 # 1-1. Select File Button
-###### def open_file_button():
-def open_file_button(Text___open_file):
-    open_file_path = ''
+###### def open_file_button(Input1, Input2):
+###### Input1 : tkinter Label Object to store file name and to present at label
+###### Input2 : to store file full path
+def open_file_button(Label___open_file):
     open_file_name = 'Please Select File...'
     [open_file_path, open_file_name] = file_info()
     if open_file_path == '' or open_file_name == '':
-        Text___open_file['text'] = 'Please Select File...'   
+        Label___open_file['text'] = 'Please Select File...'   
 
-
+    OPEN_FILE_PATH.append(open_file_path)
+    print(OPEN_FILE_PATH)
+    Label___open_file['text'] = open_file_name
 
 
 Label___open_file_A = tk.Label(root, text="File A : ")
 Label___open_file_A.grid(row=1, column=0, sticky='E')
-Text___open_file_A = tk.Label(root, text="Please Select File...", height = 1, width = 45, bg="lightblue")
-Text___open_file_A.grid(row=1, column=1, padx=5, pady=5, sticky='WE')
-button___open_file_A  = tk.Button(root, text="Select...", command=lambda: open_file_button(Text___open_file_A))
+Label2___open_file_A = tk.Label(root, text="Please Select File...", height = 1, width = 45, bg="lightblue")
+Label2___open_file_A.grid(row=1, column=1, padx=5, pady=5, sticky='WE')
+button___open_file_A  = tk.Button(root, text="Select...", command=lambda: open_file_button(Label2___open_file_A))
 button___open_file_A.grid(row=1, column=2, padx=5, pady=5, sticky='W')
+
 
 
 Label___open_file_B = tk.Label(root, text="File B : ")
 Label___open_file_B.grid(row=2, column=0, sticky='E')
-Text___open_file_B = tk.Label(root, text="Please Select File...", height = 1, width = 45, bg="lightblue")
-Text___open_file_B.grid(row=2, column=1, padx=5, pady=5, sticky='WE')
-button___open_file_B  = tk.Button(root, text="Select...", command=lambda: open_file_button(Text___open_file_B))
+Label2___open_file_B = tk.Label(root, text="Please Select File...", height = 1, width = 45, bg="lightblue")
+Label2___open_file_B.grid(row=2, column=1, padx=5, pady=5, sticky='WE')
+button___open_file_B  = tk.Button(root, text="Select...", command=lambda: open_file_button(Label2___open_file_B))
 button___open_file_B.grid(row=2, column=2, padx=5, pady=5, sticky='W')
+
 
 
 Label___open_file_C = tk.Label(root, text="File C : ")
 Label___open_file_C.grid(row=3, column=0, sticky='E')
-Text___open_file_C = tk.Label(root, text="Please Select File...", height = 1, width = 45, bg="lightblue")
-Text___open_file_C.grid(row=3, column=1, padx=5, pady=5, sticky='WE')
-button___open_file_C  = tk.Button(root, text="Select...", command=lambda: open_file_button(Text___open_file_C))
+Label2___open_file_C = tk.Label(root, text="Please Select File...", height = 1, width = 45, bg="lightblue")
+Label2___open_file_C.grid(row=3, column=1, padx=5, pady=5, sticky='WE')
+button___open_file_C  = tk.Button(root, text="Select...", command=lambda: open_file_button(Label2___open_file_C))
 button___open_file_C.grid(row=3, column=2, padx=5, pady=5, sticky='W')
+
 
 
 Label___open_file_D = tk.Label(root, text="File D : ")
 Label___open_file_D.grid(row=4, column=0, sticky='E')
-Text___open_file_D = tk.Label(root, text="Please Select File...", height = 1, width = 45, bg="lightblue")
-Text___open_file_D.grid(row=4, column=1, padx=5, pady=5, sticky='WE')
-button___open_file_D  = tk.Button(root, text="Select...", command=lambda: open_file_button(Text___open_file_D))
+Label2___open_file_D = tk.Label(root, text="Please Select File...", height = 1, width = 45, bg="lightblue")
+Label2___open_file_D.grid(row=4, column=1, padx=5, pady=5, sticky='WE')
+button___open_file_D  = tk.Button(root, text="Select...", command=lambda: open_file_button(Label2___open_file_D))
 button___open_file_D.grid(row=4, column=2, padx=5, pady=5, sticky='W')
 
 
 Label___open_file_E = tk.Label(root, text="File E : ")
 Label___open_file_E.grid(row=5, column=0, sticky='E')
-Text___open_file_E = tk.Label(root, text="Please Select File...", height = 1, width = 45, bg="lightblue")
-Text___open_file_E.grid(row=5, column=1, padx=5, pady=5, sticky='WE')
-button___open_file_E  = tk.Button(root, text="Select...", command=lambda: open_file_button(Text___open_file_E))
+Label2___open_file_E = tk.Label(root, text="Please Select File...", height = 1, width = 45, bg="lightblue")
+Label2___open_file_E.grid(row=5, column=1, padx=5, pady=5, sticky='WE')
+button___open_file_E  = tk.Button(root, text="Select...", command=lambda: open_file_button(Label2___open_file_E))
 button___open_file_E.grid(row=5, column=2, padx=5, pady=5, sticky='W')
 
 
+# 2. Check Files
+###### def check_file_button():
+def check_file_button(Label___check_file):
+    Label___check_file['text'] = OPEN_FILE_PATH
+    print(len(OPEN_FILE_PATH))
+    i = 0
+    end = len(OPEN_FILE_PATH)
+    for i in range(0,end):
+        print(i)
+        print(OPEN_FILE_PATH[i])
+
+
+Label___check_file = tk.Label(root, text="2. Check File")
+Label___check_file.grid(row=6, column=0, columnspan=3, sticky='EW')
+button___check_file = tk.Button(root, text="File Checking", command=lambda: check_file_button(Label2___check_file))
+button___check_file.grid(row=7, column=0, columnspan=3, padx=5, pady=5, sticky='EW')
+
+Label2___check_file = tk.Label(root, text="...", height = 1, width = 45, bg="orange")
+Label2___check_file.grid(row=8, column=0, columnspan=3, padx=5, pady=5, sticky='EW')
 
 
 # Text___open_file = tk.Text(root, height = 5, width = 52)
