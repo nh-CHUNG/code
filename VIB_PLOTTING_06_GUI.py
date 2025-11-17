@@ -35,8 +35,8 @@ def ploting(input_path):
     import os
     # import pandas as pd
     ##### 불러온 파일 정리1
-    xw.App(visible=False)
-    # xw.App(visible=True)
+    # xw.App(visible=False)
+    xw.App(visible=True)
     book = xw.Book(input_path)
     # book.sheets(1).range('1:1').delete()
     # book.sheets(1).range('A:A').insert("right")
@@ -55,10 +55,17 @@ def ploting(input_path):
 
     ##### Re-Make data
     time_step = 0.001
-    time = np.arange(0,(row_size-2)*time_step,time_step)
-    x = np_input[1:row_size-1,1]
-    y = np_input[1:row_size-1,2]
-    z_1 = np_input[1:row_size-1,3]-1
+    time = np.arange(0,(row_size-3)*time_step,time_step)
+    x = np_input[2:row_size-1,1]
+    x = x.astype(np.float32) # xlsx에서 불러올 때, 숫자가 문자 타입으로(U32) 저장되는 경우가 있어서, 문자를 float 타입으로 변경
+
+    y = np_input[2:row_size-1,2]
+    y = y.astype(np.float32) # xlsx에서 불러올 때, 숫자가 문자 타입으로(U32) 저장되는 경우가 있어서, 문자를 float 타입으로 변경
+
+    z = np_input[2:row_size-1,3]
+    z = z.astype(np.float32) # xlsx에서 불러올 때, 숫자가 문자 타입으로(U32) 저장되는 경우가 있어서, 문자를 float 타입으로 변경
+    z_1 = z - 1
+
     RMS = ((x**2 + y**2 + z_1**2)/3)**0.5
     del np_input
 
