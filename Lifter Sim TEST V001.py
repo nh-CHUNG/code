@@ -1,4 +1,5 @@
 import matplotlib.pyplot as plt
+from matplotlib.gridspec import GridSpec
 import matplotlib.cm as cm
 import matplotlib.colors as colors
 import numpy as np
@@ -10,6 +11,7 @@ def Lift_test():
     
     ###### Left[Floor][Destination] = value = waiting time
     FLOOR = 4 
+    Divider = 10
     Left = np.eye( FLOOR ) 
     i=0 ; j=0
     for i in range(FLOOR):
@@ -28,22 +30,30 @@ def Lift_test():
     ###### Plot 설정
     plt.ion() 
     fig, axs = plt.subplots(4, 2, figsize=(4,7), constrained_layout=True)
+    gs = axs[3, 1].get_gridspec()
     
     axis_Floor = [f for f in range(0, 4)]
+    
+    ######### Plot 색상 설정
     cmap = cm.Pastel2
     norm = colors.Normalize(vmin=min(axis_Floor), vmax=max(axis_Floor))
     bar_colors = [cmap(norm(value)) for value in axis_Floor]
 
+
+    ######### 초기 Plot 생성
     i = 0
+    y_max = Divider
+
     for i in range(0,4):
+        axs[FLOOR-1-i,0].bar(axis_Floor, Left[i], width=1, edgecolor="white", linewidth=0.7, color=bar_colors)        
         axs[FLOOR-1-i,0].set_title(f"{i} Floor",loc='right', size=8)
-        axs[FLOOR-1-i,0].set_xticks([min(axis_Floor), 1, max(axis_Floor)])
+        axs[FLOOR-1-i,0].set_xticks([xticks for xticks in range(min(axis_Floor), max(axis_Floor)+1)])
         if i==0:
             axs[FLOOR-1-i,0].set_xlabel('Destination [floor]', size=6)
-        axs[FLOOR-1-i,0].set_yticks([0, 1, np.max(Left)])
+        axs[FLOOR-1-i,0].set_yticks([yticks for yticks in range(0, y_max+1)])
         axs[FLOOR-1-i,0].set_ylabel('Time Sent [sec]', size=6)
-        axs[FLOOR-1-i,0].bar(axis_Floor, Left[i], width=1, edgecolor="white", linewidth=0.7, color=bar_colors)
 
+    
     # while TIME <= TIME_End:
     #     try:
     #         print(Left)
