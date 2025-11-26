@@ -19,8 +19,8 @@ def Lift_test():
             if Left[i][j]==1:
                 Left[i][j] = 0
             else :
-                Left[i][j] = int(np.random.rand()*10)
-    print(Left)
+                Left[i][j] = Wait_time = int(np.random.rand()*10)
+    print("Left[][] = ",Left)
 
     ###### Lift P V A
     Lift_Position = 0
@@ -29,10 +29,15 @@ def Lift_test():
 
     ###### Plot 설정
     plt.ion() 
-    fig, axs = plt.subplots(4, 2, figsize=(4,7), constrained_layout=True)
-    gs = axs[3, 1].get_gridspec()
+
+    subplot_mosaic = np.zeros((4, 2), dtype=int)
+    i=0
+    for i in range(FLOOR):
+        subplot_mosaic[i][0] = FLOOR - i
+    print("mosaic[][]= ",subplot_mosaic)
+    axs = plt.figure(layout="constrained").subplot_mosaic(subplot_mosaic, empty_sentinel=0)
     
-    axis_Floor = [f for f in range(0, 4)]
+    axis_Floor = [f for f in range(0, FLOOR)]
     
     ######### Plot 색상 설정
     cmap = cm.Pastel2
@@ -43,15 +48,15 @@ def Lift_test():
     ######### 초기 Plot 생성
     i = 0
     y_max = Divider
-
+    
     for i in range(0,4):
-        axs[FLOOR-1-i,0].bar(axis_Floor, Left[i], width=1, edgecolor="white", linewidth=0.7, color=bar_colors)        
-        axs[FLOOR-1-i,0].set_title(f"{i} Floor",loc='right', size=8)
-        axs[FLOOR-1-i,0].set_xticks([xticks for xticks in range(min(axis_Floor), max(axis_Floor)+1)])
+        axs[i+1].bar(axis_Floor, Left[i], width=1, edgecolor="white", linewidth=0.7, color=bar_colors)        
+        axs[i+1].set_title(f"{i} Floor",loc='right', size=8)
+        axs[i+1].set_xticks([xticks for xticks in range(min(axis_Floor), max(axis_Floor)+1)])
         if i==0:
-            axs[FLOOR-1-i,0].set_xlabel('Destination [floor]', size=6)
-        axs[FLOOR-1-i,0].set_yticks([yticks for yticks in range(0, y_max+1)])
-        axs[FLOOR-1-i,0].set_ylabel('Time Sent [sec]', size=6)
+            axs[i+1].set_xlabel('Destination [floor]', size=6)
+        axs[i+1].set_yticks([yticks for yticks in range(0, y_max+1, 3)])
+        axs[i+1].set_ylabel('Time Sent [sec]', size=6)
 
     
     # while TIME <= TIME_End:
@@ -78,7 +83,7 @@ def Lift_test():
     #         break
 
     plt.ioff() # 대화형 모드 비활성화
-    # plt.tight_layout()
+    plt.tight_layout()
     plt.show()
 
     # Temp
